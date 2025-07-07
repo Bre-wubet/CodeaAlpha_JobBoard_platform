@@ -1,7 +1,7 @@
-import Application from "../models/Application";
-import Job from "../models/Job";
-import Candidate from "../models/Candidate";
-import Resume from "../models/Resume";
+import Application from "../models/Application.js";
+import Job from "../models/Job.js";
+import Candidate from "../models/Candidate.js";
+import Resume from "../models/Resume.js";
 
 //apply for a job
 export const applyForJob = async (req, res) => {

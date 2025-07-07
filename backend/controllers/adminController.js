@@ -1,5 +1,5 @@
-import User from "../models/User";
-import Job from "../models/Job";
+import User from "../models/User.js";
+import Job from "../models/Job.js";
 
 
 // Get all users

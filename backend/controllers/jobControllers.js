@@ -16,7 +16,7 @@ export const publicJobSearch = async (req, res) => {
       query.jobType = jobType;
     }
 
-    const jobs = await Job.find(query).populate('employer', 'name email');
+    const jobs = await Job.find(query).populate('postedBy', 'name email');
     res.status(200).json(jobs);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -26,7 +26,7 @@ export const publicJobSearch = async (req, res) => {
 // Get job details
 export const getJobDetails = async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id).populate('employer', 'name email');
+    const job = await Job.findById(req.params.id).populate('postedBy', 'name email');
     if (!job) {
       return res.status(404).json({ message: 'Job not found' });
     }
@@ -48,8 +48,8 @@ export const createJob = async (req, res) => {
         min: req.body.salaryRange.min,
         max: req.body.salaryRange.max,
       },    
-      jobType: req.body.jobType,
-      employer: req.user.id,
+      tags: req.body.tags,
+      postedBy: req.user.id,
     });
     const savedJob = await newJob.save();
     res.status(201).json(savedJob);

@@ -1,12 +1,12 @@
 import express from 'express';
-import User from '../models/User';
+import User from '../models/User.js';
 
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 // Register a new user
 export const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
   try {
     // Check if user already exists
@@ -24,6 +24,7 @@ export const registerUser = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     await user.save();

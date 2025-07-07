@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { authMiddleware } from "../middlewares/authMiddleware";
-import { roleMiddleware } from "../middlewares/roleMiddleware";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
+import { roleMiddleware } from "../middlewares/roleMiddleware.js";
 import {
   getAllUsers,
   getUserById,
   jobStatistics,
   updateUserRole,
   deleteUser,
-} from "../controllers/adminController";
+} from "../controllers/adminController.js";
 const router = Router();
 
 // Admin routes
