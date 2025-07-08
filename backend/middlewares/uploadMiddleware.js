@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 // Storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../uploads/resumes')); // Make sure this folder exists
+    cb(null, path.join(__dirname, '../uploads')); // Make sure this folder exists
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));

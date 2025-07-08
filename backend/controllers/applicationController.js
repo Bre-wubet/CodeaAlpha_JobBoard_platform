@@ -5,43 +5,44 @@ import Resume from "../models/Resume.js";
 
 //apply for a job
 export const applyForJob = async (req, res) => {
-  const { jobId, resumeId, coverLetter } = req.body;
-  const candidateId = req.user._id;
+  const { jobId, candidateId, resumeId, coverLetter } = req.body;
 
   try {
-    // Check if the job exists
+    // Validate job
     const job = await Job.findById(jobId);
     if (!job) {
       return res.status(404).json({ message: "Job not found" });
     }
 
-    // Check if the candidate exists
-    const candidate = await Candidate.findById(candidateId);
+    // Validate candidate
+    const candidate = await Candidate.findById(candidateId).populate("userId");
     if (!candidate) {
       return res.status(404).json({ message: "Candidate not found" });
     }
 
-    // Check if the resume exists
+    // Validate resume
     const resume = await Resume.findById(resumeId);
     if (!resume) {
       return res.status(404).json({ message: "Resume not found" });
     }
 
-    // Create a new application
+    // Create application using correct field names
     const application = new Application({
-      job: jobId,
-      candidate: candidateId,
-      resume: resumeId,
+      jobId,
+      candidateId,
+      resumeId,
       coverLetter,
     });
 
     await application.save();
+
     res.status(201).json({ message: "Application submitted successfully", application });
   } catch (error) {
     console.error("Error applying for job:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 // Get applications by job ID
 export const getApplicationsByJobId = async (req, res) => {
@@ -55,7 +56,12 @@ export const getApplicationsByJobId = async (req, res) => {
     }
 
     // Get applications for the job
-    const applications = await Application.find({ job: jobId }).populate("candidate resume");
+    const applications = await Application.find({ jobId }).populate({
+        path: "candidateId",
+        populate: { path: "userId" }, // deeply populate candidate's user
+      })
+      .populate("resumeId")
+      .populate("jobId");
     res.status(200).json({ applications });
   } catch (error) {
     console.error("Error fetching applications by job ID:", error);
@@ -69,7 +75,12 @@ export const getApplicationById = async (req, res) => {
 
   try {
     // Check if the application exists
-    const application = await Application.findById(id).populate("candidate resume");
+    const application = await Application.findById(id).populate({
+        path: "candidateId",
+        populate: { path: "userId" }, // deeply populate candidate's user
+      })
+      .populate("resumeId")
+      .populate("jobId");
     if (!application) {
       return res.status(404).json({ message: "Application not found" });
     }
