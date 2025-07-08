@@ -36,16 +36,16 @@ A full-featured job board web application built with Express.js, MongoDB, and Mo
 
   job-board-platform/
   
-├── config/ - DB connection, environment setup
-├── controllers/ - Route logic for users, jobs, apps, admin
-├── models/ - Mongoose schemas
-├── routes/ - Express route definitions
-├── middlewares/ - Authentication, role-checking, error handlers
-├── services/ - Business logic helpers (file, search, stats)
-├── uploads/ - Uploaded resume files
-├── app.js # App initialization
-├── server.js # Entry point
-└── README.md
+- config/ - DB connection, environment setup
+- controllers/ - Route logic for users, jobs, apps, admin
+- models/ - Mongoose schemas
+- routes/ - Express route definitions
+- middlewares/ - Authentication, role-checking, error handlers
+- services/ - Business logic helpers (file, search, stats)
+- uploads/ - Uploaded resume files
+- app.js # App initialization
+- server.js # Entry point
+- README.md
 
 
 
@@ -54,7 +54,7 @@ A full-featured job board web application built with Express.js, MongoDB, and Mo
 ### 1. Clone the repository
 
 ...bash
-git clone https://github.com/your-username/job-board-platform.git
+[git clone https://github.com/Bre-wubet/CodeaAlpha_JobBoard_platform.git
 cd job-board-platform
 2. Install dependencies
 ...bash
@@ -62,11 +62,11 @@ npm install
 3. Set up environment variables
 
 .env
-PORT=5000
-MONGO_URI=your mongodb uri
-JWT_SECRET=your_jwt_secret
-MAIL_USER=your_email@example.com
-MAIL_PASS=your_email_password
+- PORT=5000
+- MONGO_URI=your mongodb uri
+- JWT_SECRET=your_jwt_secret
+- MAIL_USER=your_email@example.com
+- MAIL_PASS=your_email_password
 
 4. Start the development server
 ...bash
