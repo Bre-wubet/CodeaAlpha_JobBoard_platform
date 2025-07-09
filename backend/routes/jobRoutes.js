@@ -14,7 +14,7 @@ import {
 const jobRoutes = Router();
 
 //typical end points
-jobRoutes.get('/', publicJobSearch);
+jobRoutes.get('/search', publicJobSearch);
 jobRoutes.get('/:id', getJobDetails);
 jobRoutes.post('/', authMiddleware, roleMiddleware('employer'), createJob);
 jobRoutes.put('/:id', authMiddleware, roleMiddleware('employer'), updateJob);

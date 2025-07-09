@@ -3,9 +3,9 @@ import Job from '../models/Job.js';
 
 // Search jobs by title
 export const searchJobs = async (req, res) => {
-  const { title, location, jobType, salaryRange } = req.query;
+  const { title, location, jobType, salaryRange } = req.query || {};
 
-  try {
+  // If no query parameters are provided, return all jobs
     const query = {};
     
     if (title) {
@@ -25,10 +25,7 @@ export const searchJobs = async (req, res) => {
       query.salary = { $gte: minSalary, $lte: maxSalary };
     }
 
-    const jobs = await Job.find(query).populate('employer', 'companyName');
+    const jobs = await Job.find(query);
 
-    res.status(200).json(jobs);
-  } catch (error) {
-    res.status(500).json({ message: 'Error searching for jobs', error: error.message });
-  }
+    return jobs;
 };

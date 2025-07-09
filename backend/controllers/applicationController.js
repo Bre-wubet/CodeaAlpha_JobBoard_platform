@@ -3,7 +3,7 @@ import Job from "../models/Job.js";
 import Candidate from "../models/Candidate.js";
 import Resume from "../models/Resume.js";
 
-//apply for a job
+//apply for a job with attached resume and associated candidate with assigning to the job
 export const applyForJob = async (req, res) => {
   const { jobId, candidateId, resumeId, coverLetter } = req.body;
 
@@ -42,7 +42,6 @@ export const applyForJob = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
 
 // Get applications by job ID
 export const getApplicationsByJobId = async (req, res) => {
@@ -92,7 +91,7 @@ export const getApplicationById = async (req, res) => {
   }
 };
 
-// Update application status
+// Update application status by the employer for the application associated with his job
 export const updateApplicationStatus = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -114,6 +113,7 @@ export const updateApplicationStatus = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
 // Delete application
 export const deleteApplication = async (req, res) => {
   const { id } = req.params;

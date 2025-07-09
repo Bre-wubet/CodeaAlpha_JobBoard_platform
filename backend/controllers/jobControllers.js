@@ -1,22 +1,9 @@
 import Job from '../models/Job.js';
-
+import { searchJobs } from '../services/jobSearchService.js';
 //public job search
 export const publicJobSearch = async (req, res) => {
   try {
-    const { search, location, jobType } = req.query;
-    const query = {};
-
-    if (search) {
-      query.title = { $regex: search, $options: 'i' };
-    }
-    if (location) {
-      query.location = { $regex: location, $options: 'i' };
-    }
-    if (jobType) {
-      query.jobType = jobType;
-    }
-
-    const jobs = await Job.find(query).populate('postedBy', 'name email');
+    const jobs = await searchJobs(req.query);
     res.status(200).json(jobs);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Job from "../models/Job.js";
+import Application from "../models/Application.js";
 
 
 // Get all users
@@ -29,17 +30,35 @@ export const getUserById = async (req, res) => {
   }
 };
 
-// Get job statistics
+// admin reporting statistics and with applications to each job
 export const jobStatistics = async (req, res) => {
   try {
     const totalJobs = await Job.countDocuments();
-    const totalApplications = await Job.aggregate([
-      { $unwind: "$applications" },
-      { $group: { _id: null, total: { $sum: 1 } } },
+    const totalApplications = await Application.countDocuments();
+
+    const jobsWithApplications = await Job.aggregate([
+      {
+        $lookup: {
+          from: "applications",
+          localField: "_id",
+          foreignField: "job",
+          as: "applications",
+        },
+      },
+      {
+        $project: {
+          title: 1,
+          company: 1,
+          location: 1,
+          applications: { $size: "$applications" },
+        },
+      },
     ]);
+
     res.status(200).json({
       totalJobs,
-      totalApplications: totalApplications[0]?.total || 0,
+      totalApplications,
+      jobsWithApplications,
     });
   } catch (error) {
     console.error("Error fetching job statistics:", error);
