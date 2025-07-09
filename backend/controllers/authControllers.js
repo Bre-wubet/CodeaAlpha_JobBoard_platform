@@ -1,6 +1,6 @@
 import express from 'express';
 import User from '../models/User.js';
-
+import { sendEmail } from '../services/emailService.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -28,6 +28,13 @@ export const registerUser = async (req, res) => {
     });
 
     await user.save();
+
+    // send welcome email
+    await sendEmail(
+       email,
+      'Welcome to Job Board Platform',
+      `Hello ${name},\n\nThank you for registering on our platform. We are excited to have you on board!\n\nBest regards,\nJob Board Team`
+    );
 
     // Create JWT token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
