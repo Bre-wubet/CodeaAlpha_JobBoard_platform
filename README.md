@@ -15,12 +15,11 @@ A full-featured job board web application built with Express.js, MongoDB, and Mo
 
 ### Authentication & Authorization
 - JWT-based secure login
-- Role-based access control: `admin`, `employer`, `candidate`
+- Role-based access control: admin, employer, candidate
 
 ### Admin Panel (API)
 - Manage users and roles
 - Application/job stats
-- View system usage
 
 ## Tech Stack
 
@@ -35,19 +34,18 @@ A full-featured job board web application built with Express.js, MongoDB, and Mo
 
 ## Folder structure
 
-job-board-platform/
-├── config/ # DB connection, environment setup
-├── controllers/ # Route logic for users, jobs, apps, admin
-├── models/ # Mongoose schemas
-├── routes/ # Express route definitions
-├── middlewares/ # Authentication, role-checking, error handlers
-├── services/ # Business logic helpers (file, search, stats)
-├── uploads/ # Uploaded resume files
-├── tests/ # Jest + Supertest test cases
-├── swagger.js # Swagger configuration
-├── app.js # App initialization
-├── server.js # Entry point
-└── README.md
+  job-board-platform/
+  
+- config/ - DB connection, environment setup
+- controllers/ - Route logic for users, jobs, apps, admin
+- models/ - Mongoose schemas
+- routes/ - Express route definitions
+- middlewares/ - Authentication, role-checking, error handlers
+- services/ - Business logic helpers (file, search, stats)
+- uploads/ - Uploaded resume files
+- app.js # App initialization
+- server.js # Entry point
+- README.md
 
 
 
@@ -55,22 +53,23 @@ job-board-platform/
 
 ### 1. Clone the repository
 
-```bash
-git clone https://github.com/your-username/job-board-platform.git
+...bash
+[git clone https://github.com/Bre-wubet/CodeaAlpha_JobBoard_platform.git
 cd job-board-platform
 2. Install dependencies
-bash
+...bash
 npm install
 3. Set up environment variables
 
-env
-PORT=5000
-MONGO_URI=your mongodb uri
-JWT_SECRET=your_jwt_secret
-MAIL_USER=your_email@example.com
-MAIL_PASS=your_email_password
+.env
+- PORT=5000
+- MONGO_URI=your mongodb uri
+- JWT_SECRET=your_jwt_secret
+- MAIL_USER=your_email@example.com
+- MAIL_PASS=your_email_password
+
 4. Start the development server
-bash
+...bash
 npm run dev
 
 
