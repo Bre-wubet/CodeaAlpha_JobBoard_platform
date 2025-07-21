@@ -2,8 +2,6 @@
 
 A full-featured job board web application built with Express.js, MongoDB, and Mongoose following the MVC architecture. It supports job listings, employer and candidate profiles, resume uploads, job applications, and an admin panel with analytics.
 
-
-
 ## Features
 
 ### Core Functionality
@@ -21,16 +19,12 @@ A full-featured job board web application built with Express.js, MongoDB, and Mo
 - Manage users and roles
 - Application/job stats
 
-## Tech Stack
+### Tech Stack
 
-| Layer         | Technology                 |
-|---------------|-----------------------------|
-| Backend       | Node.js, Express.js         |
-| Database      | MongoDB, Mongoose           |
-| Auth          | JWT, bcrypt                 |
-| File Uploads  | Multer                      |
-| Documentation | Swagger (OpenAPI)           |
-| Testing       | Jest, Supertest             |
+ Backend      - Node.js, Express.js
+ Database     - MongoDB, Mongoose 
+ Auth         - JWT, bcrypt 
+ File Uploads - Multer   
 
 ## Folder structure
 
@@ -74,27 +68,43 @@ npm run dev
 
 
 ### API Endpoints
-## Auth
 
-POST /api/auth/register
-POST /api/auth/login
-GET /api/auth/me
+## Auth routes
+ POST [/api/auth/register]
+ POST [/api/auth/login]
+ GET [/api/auth/me]
 
-## Jobs
+## Admin routes
+ GET  [/api/admin/users] get all users
+ GET  [/api/admin/users/:id] get user by id
+ GET  [/api/admin/jobs/statistics] get job stats with their applications
+ PUT  [/api/admin/users/:id/role] update user role by user id
+ DELETE  [/api/admin/users/:id]
 
-GET /api/jobs?title=developer&location=remote
-POST /api/jobs/                 # (employer only)
-PUT /api/jobs/:id               # (employer only)
-DELETE /api/jobs/:id            # (employer only)
+## Job routes
+ GET [/api/jobs?title=developer&location=remote]
+ GET [/api/jobs/search]
+ POST [/api/jobs]       # (employer only) poat job
+ PUT [/api/jobs/:id]    # (employer only) Update job
+ DELETE [/api/jobs/:id] # (employer only)
 
-## Applications
- 
- POST /api/applications/         # (candidate only)
- GET /api/applications/          # (employer)
- PUT /api/applications/:id/status  # (employer only)
+## Employer routes for employer only
+ GET  [/api/employers/:id] find jobs by id
+ PUT  [/api/employers/:id]  update employer profile
+ GET [/api/employers/:id/jobs] find job by employer id
 
- ## Contributors
+## Candidate routes for candidate role only
+ GET  [/api/candidates/:id] get candidate by id
+ GET  [/api/candidates/:id/applied-jobs] taracking applied jobs
+ PUT  [/api/candidates/:id] update candidate profile
+ POST [/api/candidates/:id/resume] post resume by candidate
 
- | Name       | Role           |
-| ---------- | -------------- |
-| Brhina Wubet | Lead Developer |
+## Application routes
+ POST [/api/applications/] apply for job #(candidate only)
+ GET [/api/applications/]   get application by id # (employer only)
+ GET  [/api/applications/:id] get application by id
+ DELETE  [/api/applications/:id] delete application by id
+ PUT [/api/applications/:id/status] update application status # (employer only)
+
+ ## Contributor
+ Brhina Wubet - Developer 
