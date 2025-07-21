@@ -14,17 +14,6 @@ export const getCandidate = async (req, res) => {
   }
 };
 
-//create a new candidate
-export const createCandidate = async (req, res) => {
-  const newCandidate = new Candidate(req.body);
-  try {
-    const savedCandidate = await newCandidate.save();
-    res.status(201).json(savedCandidate);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 // Update candidate details
 export const updateCandidate = async (req, res) => {
   try {

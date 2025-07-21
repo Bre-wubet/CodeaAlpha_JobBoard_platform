@@ -1,12 +1,13 @@
-import express from 'express';
 import User from '../models/User.js';
-import { sendEmail } from '../services/emailService.js';
+import Employer from '../models/Employer.js';
+import Candidate from '../models/Candidate.js';
+import {sendEmail} from '../services/emailService.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-// Register a new user
+// when a user register as an employer or candidate display on the candidate or employer database
 export const registerUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, companyName } = req.body;
 
   try {
     // Check if user already exists
@@ -26,6 +27,22 @@ export const registerUser = async (req, res) => {
       password: hashedPassword,
       role,
     });
+
+    if (role === 'employer') {
+      // Create employer profile
+      const employer = new Employer({
+        userId: user._id,
+        companyName,
+      });
+      await employer.save();
+    }
+    else if (role === 'candidate') {
+      // Create candidate profile
+      const candidate = new Candidate({
+        userId: user._id
+      });
+      await candidate.save();
+    }
 
     await user.save();
 

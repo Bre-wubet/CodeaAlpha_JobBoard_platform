@@ -3,11 +3,14 @@ import Job from "../models/Job.js";
 import Application from "../models/Application.js";
 
 
-// Get all users
+// Get all users and display the counts of candidates and employers
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res.status(200).json({ users });
+    const candidateCount = users.filter(user => user.role === "candidate").length;
+    const employerCount = users.filter(user => user.role === "employer").length;
+
+    res.status(200).json({ candidateCount, employerCount, users });
   } catch (error) {
     console.error("Error fetching all users:", error);
     res.status(500).json({ message: "Internal server error" });

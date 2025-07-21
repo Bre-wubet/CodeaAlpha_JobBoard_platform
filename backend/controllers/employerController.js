@@ -1,18 +1,6 @@
 import Employer from '../models/Employer.js';
 import Job from '../models/Job.js';
 
-
-// Create a new employer
-export const createEmployer = async (req, res) => {
-  const newEmployer = new Employer(req.body);
-  try {
-    const savedEmployer = await newEmployer.save();
-    res.status(201).json(savedEmployer);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 // Get employer details
 export const getEmployer = async (req, res) => {
   try {
