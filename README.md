@@ -70,41 +70,41 @@ npm run dev
 ### API Endpoints
 
 ## Auth routes
- POST [/api/auth/register]
- POST [/api/auth/login]
- GET [/api/auth/me]
+ - POST [/api/auth/register]
+ - POST [/api/auth/login]
+ - GET [/api/auth/me]
 
 ## Admin routes
- GET  [/api/admin/users] get all users
- GET  [/api/admin/users/:id] get user by id
- GET  [/api/admin/jobs/statistics] get job stats with their applications
- PUT  [/api/admin/users/:id/role] update user role by user id
- DELETE  [/api/admin/users/:id]
+ - GET  [/api/admin/users/:id] get user by id
+ - GET  [/api/admin/jobs/statistics] get job stats with their applications
+ - GET  [/api/admin/users] get all users
+ - PUT  [/api/admin/users/:id/role] update user role by user id
+ - DELETE  [/api/admin/users/:id]
 
 ## Job routes
- GET [/api/jobs?title=developer&location=remote]
- GET [/api/jobs/search]
- POST [/api/jobs]       # (employer only) poat job
- PUT [/api/jobs/:id]    # (employer only) Update job
- DELETE [/api/jobs/:id] # (employer only)
+ - GET [/api/jobs?title=developer&location=remote]
+ - GET [/api/jobs/search]
+ - POST [/api/jobs]       # (employer only) poat job
+ - PUT [/api/jobs/:id]    # (employer only) Update job
+ - DELETE [/api/jobs/:id] # (employer only)
 
 ## Employer routes for employer only
- GET  [/api/employers/:id] find jobs by id
- PUT  [/api/employers/:id]  update employer profile
- GET [/api/employers/:id/jobs] find job by employer id
+ - GET  [/api/employers/:id] find jobs by id
+ - PUT  [/api/employers/:id]  update employer profile
+ - GET [/api/employers/:id/jobs] find job by employer id
 
 ## Candidate routes for candidate role only
- GET  [/api/candidates/:id] get candidate by id
- GET  [/api/candidates/:id/applied-jobs] taracking applied jobs
- PUT  [/api/candidates/:id] update candidate profile
- POST [/api/candidates/:id/resume] post resume by candidate
+ - GET  [/api/candidates/:id] get candidate by id
+ - GET  [/api/candidates/:id/applied-jobs] taracking applied jobs
+ - PUT  [/api/candidates/:id] update candidate profile
+ - POST [/api/candidates/:id/resume] post resume by candidate
 
 ## Application routes
- POST [/api/applications/] apply for job #(candidate only)
- GET [/api/applications/]   get application by id # (employer only)
- GET  [/api/applications/:id] get application by id
- DELETE  [/api/applications/:id] delete application by id
- PUT [/api/applications/:id/status] update application status # (employer only)
+ - POST [/api/applications/] apply for job #(candidate only)
+ - GET [/api/applications/]   get application by id # (employer only)
+ - GET  [/api/applications/:id] get application by id
+ - DELETE  [/api/applications/:id] delete application by id
+ - PUT [/api/applications/:id/status] update application status # (employer only)
 
  ## Contributor
  Brhina Wubet - Developer 
