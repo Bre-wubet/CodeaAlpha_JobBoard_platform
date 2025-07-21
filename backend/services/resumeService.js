@@ -1,22 +1,22 @@
 import Resume from '../models/Resume.js';
 
-export const uploadResume = async (req, res) => {
+export const uploadResume = async (resumeFile, candidateId) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded' });
+    if (!resumeFile || !candidateId) {
+      throw new Error("Resume file and candidate ID are required");
     }
 
     const newResume = new Resume({
-      candidateId: req.user.id,  // adjust based on your schema (maybe req.body.candidateId?)
-      filePath: req.file.path,
-      // originalName: req.file.originalname,
+      candidateId,
+      filePath: resumeFile.path,
+      originalName: resumeFile.originalname,
     });
 
     await newResume.save();
-
-    res.status(201).json({ message: 'Resume uploaded successfully', resume: newResume });
+    return newResume;
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error saving resume' });
+    throw new Error("Failed to upload resume");
   }
 };
+

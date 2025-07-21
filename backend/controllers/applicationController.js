@@ -2,6 +2,7 @@ import Application from "../models/Application.js";
 import Job from "../models/Job.js";
 import Candidate from "../models/Candidate.js";
 import Resume from "../models/Resume.js";
+import { uploadResume } from "../services/resumeService.js";
 
 import { sendEmail } from "../services/emailService.js";
 import Employer from "../models/Employer.js";
@@ -9,7 +10,8 @@ import User from "../models/User.js";
 
 //apply for a job with attached resume and associated candidate with assigning to the job
 export const applyForJob = async (req, res) => {
-  const { jobId, candidateId, resumeId, coverLetter } = req.body;
+  const { jobId, candidateId, coverLetter } = req.body;
+  const resumeFile = req.file; // Assuming the resume is uploaded and its ID is in the request file
 
   try {
     // Validate job
@@ -24,31 +26,31 @@ export const applyForJob = async (req, res) => {
       return res.status(404).json({ message: "Candidate not found" });
     }
 
-    // Validate resume
-    const resume = await Resume.findById(resumeId);
-    if (!resume) {
-      return res.status(404).json({ message: "Resume not found" });
+    // upload resume
+    const resume = await uploadResume(resumeFile, candidateId);
+    if (!resume || !resume._id) {
+      return res.status(400).json({ message: "Failed to upload resume" });
     }
-
+    
     // Create application using correct field names
     const application = new Application({
       jobId,
       candidateId,
-      resumeId,
+      resumeId: resume._id, // Use the saved resume ID
       coverLetter,
     });
 
     await application.save();
 
-    // Notify employer
-    const employer = await Employer.findById(job.postedBy._id).populate('userId');
-    const employerEmail = employer.userId.email;
+  //   // Notify employer
+  //   const employer = await Employer.findById(job.postedBy).populate('userId');
+  //   const employerEmail = employer.userId.email;
 
-    await sendEmail({
-    to: employerEmail,
-    subject: `New Application for ${job.title}`,
-    html: `<p>A new candidate has applied to your job: <strong>${job.title}</strong>.</p>`
-  });
+  //   await sendEmail({
+  //   to: employerEmail,
+  //   subject: `New Application for ${job.title}`,
+  //   html: `<p>A new candidate has applied to your job: <strong>${job.title}</strong>.</p>`
+  // });
 
     res.status(201).json({ message: "Application submitted successfully", application });
   } catch (error) {

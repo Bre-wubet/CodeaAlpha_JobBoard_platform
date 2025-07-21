@@ -48,7 +48,7 @@ A full-featured job board web application built with Express.js, MongoDB, and Mo
 ### 1. Clone the repository
 
 ...bash
-[git clone https://github.com/Bre-wubet/CodeaAlpha_JobBoard_platform.git
+git clone https://github.com/Bre-wubet/CodeaAlpha_JobBoard_platform.git
 cd job-board-platform
 2. Install dependencies
 ...bash

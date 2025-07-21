@@ -8,10 +8,11 @@ import {
   updateApplicationStatus,
   deleteApplication,
 } from "../controllers/applicationController.js";
+import upload from "../middlewares/uploadMiddleware.js";
 
 const applicationRoutes = Router();
 
-applicationRoutes.post("/", authMiddleware, roleMiddleware('candidate'), applyForJob);
+applicationRoutes.post("/", authMiddleware, roleMiddleware('candidate'), upload.single('resume'), applyForJob);
 applicationRoutes.get("/job/:jobId", authMiddleware, roleMiddleware('employer'), getApplicationsByJobId);
 applicationRoutes.get("/:id", authMiddleware, roleMiddleware('employer'), getApplicationById);
 applicationRoutes.put("/:id", authMiddleware, roleMiddleware('employer'), updateApplicationStatus);
